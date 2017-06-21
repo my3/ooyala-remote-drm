@@ -1,0 +1,26 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (2.1.0)
+    mime-types (1.25.1)
+    ooyala-v2-api (0.0.3)
+      json
+      rake
+      rdoc
+      rest-client (~> 1.6.6)
+    openssl (2.0.2)
+    rake (12.0.0)
+    rdoc (5.1.0)
+    rest-client (1.6.9)
+      mime-types (~> 1.16)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  json
+  ooyala-v2-api (~> 0.0.3)
+  openssl
+
+BUNDLED WITH
+   1.14.5

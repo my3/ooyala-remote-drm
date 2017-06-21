@@ -1,0 +1,8 @@
+{
+    "api_key": "API Key from Backlot",
+    "api_secret": "API Secret from Backlot",
+    "key_server": "keyserver.ooyala.com",
+    "wv_aes_key": "Widevine Key provided by OTS team",
+    "wv_aes_iv": "Widevine IV provided by OTS team",
+    "wv_provider_id": "PCODE of the provider"
+}
