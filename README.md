@@ -6,6 +6,16 @@ and requests sample keys for HLS Fairplay and DASH Common Encryption.
 
 Update values in config.json to use the script
 
+Create a file called config.json in the root directory with following json data:
+
+{
+    "api_key": "API Key from Backlot",
+    "api_secret": "API Secret from Backlot",
+    "key_server": "keyserver.ooyala.com",
+    "wv_aes_key": "Widevine Key provided by OTS team",
+    "wv_aes_iv": "Widevine IV provided by OTS team",
+    "wv_provider_id": "PCODE of the provider"
+}
 
 Sample Output generated:
 
