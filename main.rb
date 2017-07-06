@@ -23,7 +23,7 @@ puts "Created a movie in Backlot with embed_code #{embed_code}"
 fairplay_keys = Fairplay.new.request_key(api, embed_code)
 puts "Keys to use for HLS Fairplay: #{fairplay_keys}"
 
-Request keys for DASH CENC
+# Request keys for DASH CENC
 wv_keys = WidevineModular.new.request_key(config['key_server'], 
                            config['wv_aes_key'], 
                            config['wv_aes_iv'], 
@@ -33,9 +33,9 @@ wv_keys = WidevineModular.new.request_key(config['key_server'],
 puts "Keys to use for DASH CENC: #{wv_keys}"
 
 
-Encode assets at this point with keys above
+# Encode assets at this point with keys above
 
-After encoding, need to set the movie_urls on the asset
+# After encoding, need to set the movie_urls on the asset
 movie_urls = { 
                 :dash => "https://dash.ooyala.com/#{embed_code}.mpd",
                 :hls => "https://hls.ooyala.com/#{embed_code}.m3u8"
