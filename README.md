@@ -16,6 +16,12 @@ Create a file called `config.json` in the root directory with following json dat
 }
 ```
 
+Running the script:
+
+```
+ruby main.rb
+```
+
 Sample Output generated:
 
 ```

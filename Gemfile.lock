@@ -1,8 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     json (2.1.0)
     mime-types (1.25.1)
+    multi_xml (0.6.0)
     ooyala-v2-api (0.0.3)
       json
       rake
@@ -18,6 +21,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  httparty
   json
   ooyala-v2-api (~> 0.0.3)
   openssl
