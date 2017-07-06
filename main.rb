@@ -1,6 +1,7 @@
 require 'json'
 require 'ooyala-v2-api'
 
+require_relative 'fairplay'
 require_relative 'widevine_modular'
 
 config_file = File.read('config.json')
@@ -19,16 +20,15 @@ embed_code = response['embed_code']
 
 puts "Created a movie in Backlot with embed_code #{embed_code}"
 
-# Request keys for HLS Fairplay
-response = api.post("assets/#{embed_code}/drm_attributes/fps")
-puts "Keys to use for HLS Fairplay: #{response}"
+fairplay_keys = Fairplay.new.request_key(api, embed_code)
+puts "Keys to use for HLS Fairplay: #{fairplay_keys}"
 
 # Request keys for DASH CENC
 wv_keys = WidevineModular.new.request_key(config['key_server'], 
-                            config['wv_aes_key'], 
-                            config['wv_aes_iv'], 
-                            config['wv_provider_id'],
-                            embed_code)
+                           config['wv_aes_key'], 
+                           config['wv_aes_iv'], 
+                           config['wv_provider_id'],
+                           embed_code)
 
 puts "Keys to use for DASH CENC: #{wv_keys}"
 
