@@ -9,7 +9,18 @@ config = JSON.parse(config_file)
 
 api = Ooyala::API.new(config['api_key'], config['api_secret'])
 
-fairplay_keys = Fairplay.new.request_key(api, 'VveWJ0YjE6A_SetNdTe9E7TQyvXHQ5Rd')
+asset = {
+            :name => "My Live Remote Asset",
+            :asset_type => "remote_asset",
+            :is_live_stream => true
+        }
+
+response = api.post('assets', asset)
+embed_code = response['embed_code']
+
+puts "Created a movie in Backlot with embed_code #{embed_code}"
+
+fairplay_keys = Fairplay.new.request_key(api, embed_code)
 puts "Keys to use for HLS Fairplay: #{fairplay_keys}"
 
 Request keys for DASH CENC
