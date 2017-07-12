@@ -14,6 +14,7 @@ options = {}
 OptionParser.new do |opt|
     opt.on('--embed-code EMBEDCODE', 'Embed code to generate keys for') { |o| options[:embed_code] = o }
     opt.on('--name NAME', 'Name of remote asset to create') { |o| options[:name] = o }
+    opt.on('--environment ENVIRONMENT', 'Environment to generate keys in') { |o| options[:environment] = o }
     opt.on('--h', 'Shows possible command line arguments') do 
         puts opt
         exit
@@ -42,6 +43,14 @@ else
 
     response = api.post('assets', asset)
     embed_code = response['embed_code']
+end
+
+if options[:environment] and options[:environment] == "staging"
+    api.base_url = "https://api-staging.ooyala.com"
+    config['key_server'] = "keyserver-staging.ooyala.com"
+    puts "Making requests to staging environment"
+else
+    puts "Making requests to production environment"
 end
 
 puts "Created a movie in Backlot with embed_code #{embed_code}"
