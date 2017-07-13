@@ -2,9 +2,7 @@ require 'ooyala-v2-api'
 
 class Fairplay
 	def request_key(api, embed_code)
-		version = get_key_version(api, embed_code)
-
-		generate_keys(api, embed_code, version)
+		generate_keys(api, embed_code, get_key_version(api, embed_code))
 	end
 
 	def get_key_version(api, embed_code)
