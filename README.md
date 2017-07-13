@@ -28,6 +28,11 @@ Create new remote asset and generate keys in production
 ruby main.rb --name RemoteAssetName
 ```
 
+Pass in dash or hls urls if you need to create/update movie urls for asset
+```
+ruby main.rb --name RemoteAssetName --hls https://ooyala.m3u8 --dash https://ooyala.mpd
+```
+
 Display options
 ```
 ruby main.rb --h
