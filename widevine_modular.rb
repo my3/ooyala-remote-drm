@@ -84,11 +84,6 @@ class WidevineModular
         s.unpack("m0").first.unpack("H*").first
     end
 
-    def to_big_endian(s)
-        s = "000000020597ba1f0cd4..."
-        [s].pack('H*').unpack('N*').pack('V*').unpack('H*')
-    end
-
     def printEnvivio(key, key_id, embed_code)
         puts "Values for Envivio Encoder - DASH CENC - Widevine"
         puts "Key generation mode: Fixed Key"
