@@ -55,12 +55,17 @@ else
 
     response = api.post('assets', asset)
     embed_code = response['embed_code']
+    puts "Created a movie in Backlot with embed_code #{embed_code}"
 end
 
-puts "Created a movie in Backlot with embed_code #{embed_code}"
 
 fairplay_keys = Fairplay.new.request_key(api, embed_code)
+puts
+puts "----------------------------------------------------------------"
 puts "Keys to use for HLS Fairplay: #{fairplay_keys}"
+puts "----------------------------------------------------------------"
+puts
+puts
 
 # Request keys for DASH CENC
 wv_keys = WidevineModular.new.request_key(config['key_server'], 
@@ -69,7 +74,9 @@ wv_keys = WidevineModular.new.request_key(config['key_server'],
                            config['wv_provider_id'],
                            embed_code)
 
+puts "If you are using other encoders for DASH CENC, you have to convert following values yourself:"
 puts "Keys to use for DASH CENC: #{wv_keys}"
+puts "----------------------------------------------------------------"
 
 
 # Encode assets at this point with keys above

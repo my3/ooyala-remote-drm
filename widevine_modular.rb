@@ -20,7 +20,7 @@ class WidevineModular
         [hex_string].pack("H*")
     end
 
-    def openssl_aes_encrypt(data, key, iv, cipher_type = "AES-256-CBC")
+    def openssl_aes_encrypt(data, key, iv, cipher_type = "AES-128-CBC")
         aes = OpenSSL::Cipher.new(cipher_type)
         aes.encrypt
         aes.key = hex_to_binary(key)
@@ -63,12 +63,49 @@ class WidevineModular
         inverse_key_id = [[inverse_hex].pack("H*")].pack("m0")
         
         key_guid = key_id_parts.join('-')
+        big_endian_key_id = key_id_parts.join('')
+        base64_key_id = [[big_endian_key_id].pack("H*")].pack("m0")
         key_id = inverse_key_id
         # Same with key. decode64 and convert to binary to get the 16 bytes
         key = resp["tracks"].first["key"]
         key = strict_decode64(resp["tracks"].first["key"])
         
-        key = Base64.strict_encode64(key)
+        key = Base64.strict_encode64(key) 
+
+        puts "----------------------------------------------------------------"
+        printEnvivio(bin_to_hex(key), base64_key_id, embed_code)
+        printBento4(bin_to_hex(key), big_endian_key_id, bin_to_hex(embed_code))
+
+        # should be the last line as this is method return
         {"key": "#{key}", "key_id": "#{key_id}", "key_guid": "#{key_guid}"}
+    end
+
+    def bin_to_hex(s)
+        s.unpack("m0").first.unpack("H*").first
+    end
+
+    def to_big_endian(s)
+        s = "000000020597ba1f0cd4..."
+        [s].pack('H*').unpack('N*').pack('V*').unpack('H*')
+    end
+
+    def printEnvivio(key, key_id, embed_code)
+        puts "Values for Envivio Encoder - DASH CENC - Widevine"
+        puts "Key generation mode: Fixed Key"
+        puts "Key:                 #{key}"
+        puts "Key ID:              #{key_id}"
+        puts "Content ID:          #{embed_code}"
+        puts "Policy:              << Leave this empty >>"
+        puts "Signer name:         ooyala"
+        puts "----------------------------------------------------------------"
+    end
+
+    def printBento4(key, key_id, embed_code)
+        puts "Values for Bento4 Encoder - DASH CENC - Widevine"
+        puts "Key:                #{key}"
+        puts "Key ID:             #{key_id}"
+        puts "Content ID:         #{embed_code}"
+        puts "Provider:           ooyala"
+        puts "----------------------------------------------------------------"
     end
 end
