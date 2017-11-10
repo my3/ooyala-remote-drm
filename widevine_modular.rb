@@ -74,7 +74,8 @@ class WidevineModular
 
         puts "----------------------------------------------------------------"
         printEnvivio(bin_to_hex(key), base64_key_id, embed_code)
-        printBento4(bin_to_hex(key), big_endian_key_id, bin_to_hex(embed_code))
+        embed_hex = embed_code.each_byte.map { |b| b.to_s(16) }.join
+        printBento4(bin_to_hex(key), big_endian_key_id, embed_hex)
 
         # should be the last line as this is method return
         {"key": "#{key}", "key_id": "#{key_id}", "key_guid": "#{key_guid}"}
